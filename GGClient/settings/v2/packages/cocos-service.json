@@ -1,14 +1,18 @@
 {
   "__version__": "3.0.5",
   "game": {
-    "name": "未知游戏",
-    "app_id": "UNKNOW",
+    "app_id": "678129192",
+    "name": "GGClient",
     "c_id": "0"
   },
   "appConfigMaps": [
     {
       "app_id": "UNKNOW",
       "config_id": "2af675"
+    },
+    {
+      "app_id": "678129192",
+      "config_id": "570444"
     }
   ],
   "configs": [
@@ -18,6 +22,29 @@
       "config_name": "Default",
       "config_remarks": "",
       "services": []
+    },
+    {
+      "app_id": "678129192",
+      "config_id": "9ead56",
+      "config_name": "Default",
+      "config_remarks": "",
+      "services": []
+    },
+    {
+      "app_id": "678129192",
+      "config_id": "570444",
+      "config_name": "Default",
+      "config_remarks": "",
+      "services": [
+        {
+          "service_id": "235",
+          "enable": true,
+          "param": {
+            "app_id": "678129192",
+            "store_id": "H5"
+          }
+        }
+      ]
     }
   ]
 }
