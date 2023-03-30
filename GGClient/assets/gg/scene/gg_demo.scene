@@ -622,50 +622,6 @@
     "_id": "a0tdxEL/hAjY+8Hw1fqsNG"
   },
   {
-    "__type__": "cc.Node",
-    "_name": "Main",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 25
-      }
-    ],
-    "_prefab": null,
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": "achsfIsptGGq9xNl0Yh15C"
-  },
-  {
     "__type__": "09029Ak6qpIPJo9/5+El3f9",
     "_name": "",
     "_objFlags": 0,
@@ -675,50 +631,6 @@
     "_enabled": true,
     "__prefab": null,
     "_id": "274JbaUZBJzqVIKjuT4TzW"
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "ResMgr",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 27
-      }
-    ],
-    "_prefab": null,
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": "abFHBmj1ZHK4wbibM3oZ2M"
   },
   {
     "__type__": "46b6d9FJAtHtLLt4Jujm3rV",
