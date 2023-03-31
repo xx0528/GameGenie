@@ -1,11 +1,12 @@
 /*
  * @Author: xx
  * @Date: 2023-03-14 18:39:25
- * @LastEditTime: 2023-03-31 19:12:42
+ * @LastEditTime: 2023-03-31 20:24:28
  * @Description: 
  */
 
-import { Component, Node } from "cc"
+import { Component, Event, Node } from "cc"
+import { ListenerFunc } from "../event/EventMessage"
 import { EventMgr } from "../event/EventMgr"
 
 
@@ -50,9 +51,9 @@ export default abstract class UIBase extends Component {
     }
 
     /**通知事件列表 */
-    private _notifyEventList: Map<string, Function>
+    private _notifyEventList: Map<string, Function> = new Map<string, Function>()
     /**点击事件列表 */
-    private _registerEventList: Map<string, RegisterEvent>
+    private _registerEventList: Map<string, RegisterEvent> = new Map<string, RegisterEvent>()
 
     /* ----------------------------- 以下方法不能在子类重写 ----------------------------- */
     /**初始化函数，在onLoad之前被调用，params为打开ui是传入的不定参数数组 */
@@ -91,13 +92,14 @@ export default abstract class UIBase extends Component {
     }
 
     /**注册notice事件，disable的时候会自动移除 */
-    initEvent(eventName: string, cb: Function) {
+    initEvent(eventName: string, cb: ListenerFunc) {
         EventMgr.Instance.on(eventName, cb, this)
         this._notifyEventList.set(eventName, cb)
     }
 
-    private touchEvent(event) {
-        event.stopPropagation()
+    private touchEvent(event: Event) {
+        // event.stopPropagation()
+        event.propagationStopped = true
     }
 
     start() {
@@ -150,7 +152,7 @@ export default abstract class UIBase extends Component {
      * @param target 
      * @param playAudio 是否播放音效，默认播放
      */
-    onRegisterEvent(node: Node, callback, target = null, playAudio = true) {
+    onRegisterEvent(node: Node, callback: Function, target: UIBase | null = null, playAudio = true) {
         if (!node) {
             return
         }
@@ -159,7 +161,7 @@ export default abstract class UIBase extends Component {
         this._registerEventList.set(node.name, { callback: callback, target: target, playAudio: playAudio })
     }
 
-    unRegisterEvent(node: Node, callback, target = null) {
+    unRegisterEvent(node: Node, callback: Function, target: UIBase | null = null) {
         node.off(Node.EventType.TOUCH_END, callback, target)
     }
 }

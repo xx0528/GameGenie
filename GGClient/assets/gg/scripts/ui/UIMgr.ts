@@ -1,4 +1,4 @@
-import { instantiate, assetManager, director } from "cc"
+import { instantiate, assetManager, director, Node, Prefab, isValid } from "cc"
 import UIBase, { UIClass } from "./UIBase"
 import { ViewZorder } from "./ViewZOrder"
 
@@ -33,7 +33,7 @@ export default class UIMgr {
         }
         assetManager.loadRemote(uiClass.getUrl(), (completedCount: number, totalCount: number, item: any) => {
             onProgress && onProgress(completedCount, totalCount, item)
-        }, (error, prefab) => {
+        }, (error: Error | null, prefab: Prefab) => {
             if (error) {
                 console.error(`UIMgr OpenUI: load ui error: ${error}`)
                 return
@@ -43,7 +43,7 @@ export default class UIMgr {
                 return
             }
 
-            let uiNode: Node = instantiate(prefab) as Node
+            let uiNode: Node = instantiate(prefab)
             let ui = uiNode.getComponent(uiClass) as UIBase
             if (!ui) {
                 console.error(`${uiClass.getUrl()}没有绑定UI脚本!!!`)
@@ -53,11 +53,11 @@ export default class UIMgr {
             // let uiRoot = director.getScene().getChildByName('UIRoot')
             let uiRoot = director.getScene()
             if (!uiRoot) {
-                console.error(`当前场景${director.getScene().name}Canvas!!!`)
+                console.error(`当前场景${director.getScene()!.name}Canvas!!!`)
                 return
             }
             uiNode.parent = uiRoot
-            uiNode.zIndex = zOrder
+            uiNode.setSiblingIndex(zOrder)
             this.uiList.push(ui)
             ui.tag = uiClass
 
@@ -70,8 +70,8 @@ export default class UIMgr {
      * 清除依赖资源
      * @param prefabUrl 
      */
-    private clearDependsRes(prefabUrl) {
-        let deps = loader.getDependsRecursively(prefabUrl)
+    private clearDependsRes(prefabUrl: string) {
+        let deps =  assetManager.dependUtil.getDepsRecursively(prefabUrl)
         // console.log(`UIMgr clearDependsRes: release ${prefabUrl} depends resources `, deps)
         deps.forEach((item) => {
             // todo：排除公共资源，然后清理
@@ -120,7 +120,7 @@ export default class UIMgr {
         }
     }
 
-    public getUI<T extends UIBase>(uiClass: UIClass<T>): UIBase {
+    public getUI<T extends UIBase>(uiClass: UIClass<T>): UIBase | null{
         for (let i = 0; i < this.uiList.length; ++i) {
             if (this.uiList[i].tag === uiClass) {
                 return this.uiList[i]
