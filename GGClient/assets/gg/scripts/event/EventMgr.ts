@@ -1,7 +1,7 @@
 /*
  * @Author: xx
  * @Date: 2023-03-29 16:24:25
- * @LastEditTime: 2023-03-29 17:28:44
+ * @LastEditTime: 2023-03-31 19:09:42
  * @Description: 
  */
 
@@ -38,7 +38,7 @@ export class MessageEventData {
         data.object = object
         list.push(data)
 
-        MessageManager.Instance.on(event, listener, object)
+        EventMgr.Instance.on(event, listener, object)
     }
 
     /**
@@ -51,7 +51,7 @@ export class MessageEventData {
             return
         }
         for (let eb of ebs) {
-            MessageManager.Instance.off(event, eb.listener, eb.object)
+            EventMgr.Instance.off(event, eb.listener, eb.object)
         }
         delete this.events[event]
     }
@@ -62,7 +62,7 @@ export class MessageEventData {
      * @param args(any)          事件参数
      */
     dispatchEvent(event: string, arg: any = null) {
-        MessageManager.Instance.dispatchEvent(event, arg)
+        EventMgr.Instance.dispatchEvent(event, arg)
     }
 
     /** 清除所有的全局事件监听 */
@@ -113,8 +113,8 @@ export class RoleViewComp extends Component{
     }
 }
  */
-export class MessageManager {
-    static readonly Instance: MessageManager = new MessageManager()
+export class EventMgr {
+    static readonly Instance: EventMgr = new EventMgr()
 
     private events: any = {}
 

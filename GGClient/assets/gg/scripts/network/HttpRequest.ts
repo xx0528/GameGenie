@@ -1,7 +1,7 @@
 /*
  * @Author: xx
  * @Date: 2023-03-29 16:24:25
- * @LastEditTime: 2023-03-29 17:33:51
+ * @LastEditTime: 2023-03-31 18:31:52
  * @Description: 
  */
 
@@ -134,7 +134,7 @@ export class HttpRequest {
             }
         }
 
-        return result.substr(0, result.length - 1)
+        return result.substring(0, result.length - 1)
     }
 
     /** 

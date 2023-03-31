@@ -1,15 +1,18 @@
 /*
  * @Author: xx
  * @Date: 2023-03-14 18:39:25
- * @LastEditTime: 2023-03-29 19:29:25
+ * @LastEditTime: 2023-03-31 19:12:42
  * @Description: 
  */
 
+import { Component, Node } from "cc"
+import { EventMgr } from "../event/EventMgr"
+
 
 export interface UIClass<T extends UIBase> {
-    new(): T;
-    getUrl(): string;
-    getName(): string;
+    new(): T
+    getUrl(): string
+    getName(): string
 }
 
 interface RegisterEvent {
@@ -18,98 +21,96 @@ interface RegisterEvent {
     playAudio?: boolean,
 }
 
-const PREFAB_UI_DIR = 'prefab/';
+const PREFAB_UI_DIR = 'prefab/'
 
-const { ccclass, property } = cc._decorator;
-@ccclass
-export default abstract class UIBase extends cc.Component {
-    protected static prefabUrl;
-    protected static className;
-
-    protected mTag: any;
+export default abstract class UIBase extends Component {
+    protected static prefabUrl: string
+    protected static className: string
+    
+    protected mTag: any
     public get tag(): any {
-        return this.mTag;
+        return this.mTag
     }
     public set tag(value: any) {
-        this.mTag = value;
+        this.mTag = value
     }
 
     /**
      * 得到prefab的路径，相对于resources目录
      */
     public static getUrl(): string {
-        return PREFAB_UI_DIR + this.prefabUrl;
+        return PREFAB_UI_DIR + this.prefabUrl
     }
 
     /**
      * 类名，用于给UI命名
      */
     public static getName(): string {
-        return this.className;
+        return this.className
     }
 
     /**通知事件列表 */
-    private _notifyEventList: Map<string, Function>;
+    private _notifyEventList: Map<string, Function>
     /**点击事件列表 */
-    private _registerEventList: Map<string, RegisterEvent>;
+    private _registerEventList: Map<string, RegisterEvent>
 
     /* ----------------------------- 以下方法不能在子类重写 ----------------------------- */
     /**初始化函数，在onLoad之前被调用，params为打开ui是传入的不定参数数组 */
-    init(params) {
-        this.onInit(params);
+    init(params: any) {
+        this.onInit(params)
     }
 
     /**onLoad 会在组件被首次加载的时候被回调。且优先于任何start */
     onLoad() {
-        this._notifyEventList = new Map<string, Function>();
-        this._registerEventList = new Map<string, RegisterEvent>();
+        this._notifyEventList = new Map<string, Function>()
+        this._registerEventList = new Map<string, RegisterEvent>()
 
-        this.onUILoad();
+        this.onUILoad()
     }
 
     onDestroy() {
-        this.onUIDestroy();
+        this.onUIDestroy()
     }
 
     onEnable() {
-        this.onRegisterEvent(this.node, this.touchEvent, this, false);
+        this.onRegisterEvent(this.node, this.touchEvent, this, false)
 
-        this.onShow();
+        this.onShow()
     }
 
     onDisable() {
-        this.unRegisterEvent(this.node, this.touchEvent, this);
+        this.unRegisterEvent(this.node, this.touchEvent, this)
 
-        this.onHide();
+        this.onHide()
 
-        let self = this;
+        let self = this
         this._notifyEventList.forEach((f, key) => {
-            EventMng.off(key, f, self);
-        }, this);
-        this._notifyEventList.clear();
+            EventMgr.Instance.off(key, f, self)
+        }, this)
+        this._notifyEventList.clear()
     }
 
     /**注册notice事件，disable的时候会自动移除 */
     initEvent(eventName: string, cb: Function) {
-        EventMng.on(eventName, cb, this);
-        this._notifyEventList.set(eventName, cb);
+        EventMgr.Instance.on(eventName, cb, this)
+        this._notifyEventList.set(eventName, cb)
     }
 
     private touchEvent(event) {
-        event.stopPropagation();
+        event.stopPropagation()
     }
 
     start() {
-        this.onStart();
+        this.onStart()
     }
 
-    update(dt) {
-        this.onUpdate(dt);
+    update(dt: number) {
+        this.onUpdate(dt)
     }
     /* ---------------------------------------------------------------------------------- */
 
 
-    onInit(params) {
+    onInit(params: any) {
 
     }
 
@@ -133,7 +134,7 @@ export default abstract class UIBase extends cc.Component {
 
     }
 
-    onUpdate(dt) {
+    onUpdate(dt: number) {
 
     }
 
@@ -151,14 +152,14 @@ export default abstract class UIBase extends cc.Component {
      */
     onRegisterEvent(node: Node, callback, target = null, playAudio = true) {
         if (!node) {
-            return;
+            return
         }
-        node.on(Node.EventType.TOUCH_END, callback, target);
+        node.on(Node.EventType.TOUCH_END, callback, target)
 
-        this._registerEventList.set(node.name, { callback: callback, target: target, playAudio: playAudio });
+        this._registerEventList.set(node.name, { callback: callback, target: target, playAudio: playAudio })
     }
 
     unRegisterEvent(node: Node, callback, target = null) {
-        node.off(Node.EventType.TOUCH_END, callback, target);
+        node.off(Node.EventType.TOUCH_END, callback, target)
     }
 }

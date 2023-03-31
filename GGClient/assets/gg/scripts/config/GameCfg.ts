@@ -1,14 +1,14 @@
 /*
  * @Author: xx
  * @Date: 2023-03-29 16:24:25
- * @LastEditTime: 2023-03-29 16:35:30
+ * @LastEditTime: 2023-03-31 18:28:19
  * @Description: 游戏配置解析
  */
 
 import { GG } from "../../GG"
 
 /** 对应resources/config/config.json文件 */
-export class GameConfig {
+export class GameCfg {
 
     /** 客户端版本号配置 */
     get version(): string {

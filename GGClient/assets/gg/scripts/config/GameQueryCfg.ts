@@ -1,7 +1,7 @@
 /*
  * @Author: xx
  * @Date: 2023-03-29 16:40:54
- * @LastEditTime: 2023-03-29 17:26:11
+ * @LastEditTime: 2023-03-31 18:28:57
  * @Description: 
  */
 
@@ -14,7 +14,7 @@ import { StringUtil } from "../utils/StringUtil"
  * @example
  * config.query.data.username
  */
-export class GameQueryConfig {
+export class GameQueryCfg {
     /** 调试模式开关 */
     public get debug(): string {
         return this._data["debug"]

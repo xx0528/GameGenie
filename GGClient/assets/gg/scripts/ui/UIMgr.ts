@@ -1,17 +1,17 @@
-import { instantiate, assetManager, director } from "cc";
-import UIBase, { UIClass } from "../logic/ui/UIBase";
-import { ViewZorder } from "./ViewZOrder";
+import { instantiate, assetManager, director } from "cc"
+import UIBase, { UIClass } from "./UIBase"
+import { ViewZorder } from "./ViewZOrder"
 
-export default class UIMng {
-    private static instance: UIMng;
+export default class UIMgr {
+    private static instance: UIMgr
 
-    private uiList: UIBase[] = [];
+    private uiList: UIBase[] = []
 
-    public static getInstance(): UIMng {
+    public static getInstance(): UIMgr {
         if (this.instance == null) {
-            this.instance = new UIMng();
+            this.instance = new UIMgr()
         }
-        return this.instance;
+        return this.instance
     }
 
     private constructor() {
@@ -28,41 +28,41 @@ export default class UIMng {
      */
     public openUI<T extends UIBase>(uiClass: UIClass<T>, zOrder: number = ViewZorder.UI, callback?: Function, onProgress?: Function, ...args: any[]) {
         if (this.getUI(uiClass)) {
-            console.error(`UIMng OpenUI 1: ui ${uiClass.getName()} is already exist, please check`);
-            return;
+            console.error(`UIMgr OpenUI 1: ui ${uiClass.getName()} is already exist, please check`)
+            return
         }
         assetManager.loadRemote(uiClass.getUrl(), (completedCount: number, totalCount: number, item: any) => {
-            onProgress && onProgress(completedCount, totalCount, item);
+            onProgress && onProgress(completedCount, totalCount, item)
         }, (error, prefab) => {
             if (error) {
-                console.error(`UIMng OpenUI: load ui error: ${error}`);
-                return;
+                console.error(`UIMgr OpenUI: load ui error: ${error}`)
+                return
             }
             if (this.getUI(uiClass)) {
-                console.error(`UIMng OpenUI 2: ui ${uiClass.getName()} is already exist, please check`);
-                return;
+                console.error(`UIMgr OpenUI 2: ui ${uiClass.getName()} is already exist, please check`)
+                return
             }
 
-            let uiNode: Node = instantiate(prefab) as Node;
-            let ui = uiNode.getComponent(uiClass) as UIBase;
+            let uiNode: Node = instantiate(prefab) as Node
+            let ui = uiNode.getComponent(uiClass) as UIBase
             if (!ui) {
-                console.error(`${uiClass.getUrl()}没有绑定UI脚本!!!`);
-                return;
+                console.error(`${uiClass.getUrl()}没有绑定UI脚本!!!`)
+                return
             }
-            ui.init(args);
-            // let uiRoot = director.getScene().getChildByName('UIRoot');
-            let uiRoot = director.getScene();
+            ui.init(args)
+            // let uiRoot = director.getScene().getChildByName('UIRoot')
+            let uiRoot = director.getScene()
             if (!uiRoot) {
-                console.error(`当前场景${director.getScene().name}Canvas!!!`);
-                return;
+                console.error(`当前场景${director.getScene().name}Canvas!!!`)
+                return
             }
-            uiNode.parent = uiRoot;
-            uiNode.zIndex = zOrder;
-            this.uiList.push(ui);
-            ui.tag = uiClass;
+            uiNode.parent = uiRoot
+            uiNode.zIndex = zOrder
+            this.uiList.push(ui)
+            ui.tag = uiClass
 
-            callback && callback(ui);
-        });
+            callback && callback(ui)
+        })
     }
 
 
@@ -71,69 +71,69 @@ export default class UIMng {
      * @param prefabUrl 
      */
     private clearDependsRes(prefabUrl) {
-        let deps = loader.getDependsRecursively(prefabUrl);
-        // console.log(`UIMng clearDependsRes: release ${prefabUrl} depends resources `, deps);
+        let deps = loader.getDependsRecursively(prefabUrl)
+        // console.log(`UIMgr clearDependsRes: release ${prefabUrl} depends resources `, deps)
         deps.forEach((item) => {
             // todo：排除公共资源，然后清理
             // if (item.indexOf('common') === -1) {
-            //     loader.release(item);
+            //     loader.release(item)
             // }
-        });
+        })
     }
 
     public closeUI<T extends UIBase>(uiClass: UIClass<T>) {
         for (let i = 0; i < this.uiList.length; ++i) {
             if (this.uiList[i].tag === uiClass) {
                 if (isValid(this.uiList[i].node)) {
-                    this.uiList[i].node.destroy();
-                    this.clearDependsRes(uiClass.getUrl());
+                    this.uiList[i].node.destroy()
+                    this.clearDependsRes(uiClass.getUrl())
                 }
-                this.uiList.splice(i, 1);
-                return;
+                this.uiList.splice(i, 1)
+                return
             }
         }
     }
 
     public closeAllUI() {
         if (this.uiList.length == 0) {
-            return;
+            return
         }
-        this.closeUI(this.uiList[0].tag);
+        this.closeUI(this.uiList[0].tag)
         while (this.uiList.length > 0) {
-            this.closeUI(this.uiList[0].tag);
+            this.closeUI(this.uiList[0].tag)
         }
     }
 
     public showUI<T extends UIBase>(uiClass: UIClass<T>, callback?: Function) {
-        let ui = this.getUI(uiClass);
+        let ui = this.getUI(uiClass)
         if (!ui) {
-            console.error(`UIMng showUI: ui ${uiClass.getName()} not exist`);
-            return;
+            console.error(`UIMgr showUI: ui ${uiClass.getName()} not exist`)
+            return
         }
-        ui.node.active = true;
+        ui.node.active = true
     }
 
     public hideUI<T extends UIBase>(uiClass: UIClass<T>) {
-        let ui = this.getUI(uiClass);
+        let ui = this.getUI(uiClass)
         if (ui) {
-            ui.node.active = false;
+            ui.node.active = false
         }
     }
 
     public getUI<T extends UIBase>(uiClass: UIClass<T>): UIBase {
         for (let i = 0; i < this.uiList.length; ++i) {
             if (this.uiList[i].tag === uiClass) {
-                return this.uiList[i];
+                return this.uiList[i]
             }
         }
-        return null;
+        return null
     }
 
     public isShowing<T extends UIBase>(uiClass: UIClass<T>) {
-        let ui = this.getUI(uiClass);
+        let ui = this.getUI(uiClass)
         if (!ui) {
-            return false;
+            return false
         }
-        return ui.node.active;
+        return ui.node.active
     }
 }

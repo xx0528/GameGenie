@@ -6,16 +6,16 @@
  */
 
 import { BuildTimeConstants } from "./BuildTimeConstants"
-import { GameConfig } from "./GameConfig"
-import { GameQueryConfig } from "./GameQueryConfig"
+import { GameCfg } from "./GameCfg"
+import { GameQueryCfg } from "./GameQueryCfg"
 
 /** 游戏配置静态访问类 */
 export class Config {
     /** 环境变量 */
     public btc!: BuildTimeConstants
 
-    public game!: GameConfig
+    public game!: GameCfg
 
-    public query!: GameQueryConfig
+    public query!: GameQueryCfg
 }
 
