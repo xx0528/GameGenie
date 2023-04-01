@@ -6,12 +6,12 @@
  */
 
 export class Singleton<T> {
-    // private static instance: T;
+    // private static instance: T 
 
     // public static getInstance<T>(clazz: { new(): T }): T {
     //     if (!this.instance) {
-    //         this.instance = new clazz();
+    //         this.instance = new clazz() 
     //     }
-    //     return this.instance;
+    //     return this.instance 
     // }
 }

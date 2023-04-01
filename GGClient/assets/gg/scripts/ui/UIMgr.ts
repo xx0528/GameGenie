@@ -82,7 +82,7 @@ export default class UIMgr {
     }
 
     public closeUI<T extends UIBase>(uiClass: UIClass<T>) {
-        for (let i = 0; i < this.uiList.length; ++i) {
+        for (let  i = 0; i < this.uiList.length; ++i) {
             if (this.uiList[i].tag === uiClass) {
                 if (isValid(this.uiList[i].node)) {
                     this.uiList[i].node.destroy()
@@ -121,7 +121,7 @@ export default class UIMgr {
     }
 
     public getUI<T extends UIBase>(uiClass: UIClass<T>): UIBase | null{
-        for (let i = 0; i < this.uiList.length; ++i) {
+        for (let  i = 0; i < this.uiList.length; ++i) {
             if (this.uiList[i].tag === uiClass) {
                 return this.uiList[i]
             }

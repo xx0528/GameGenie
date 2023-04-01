@@ -24,55 +24,55 @@ export class GameCfg {
     }
     /** 本地存储内容加密 key */
     get localDataKey(): string {
-        return this._data.config.localDataKey;
+        return this._data.config.localDataKey 
     }
     /** 本地存储内容加密 iv */
     get localDataIv(): string {
-        return this._data.config.localDataIv;
+        return this._data.config.localDataIv 
     }
     /** Http 服务器地址 */
     get httpServer(): string {
-        return this._data.config.httpServer;
+        return this._data.config.httpServer 
     }
     /** Http 请求超时时间 */
     get httpTimeout(): number {
-        return this._data.config.httpTimeout;
+        return this._data.config.httpTimeout 
     }
 
     /** 获取当前客户端支持的语言类型 */
     get language(): Array<string> {
-        return this._data.language.type || ["zh"];
+        return this._data.language.type || ["zh"] 
     }
     /** 获取当前客户端支持的语言 Json 配置路径 */
     get languagePathJson(): string {
-        return this._data.language.path.json || "language/json";
+        return this._data.language.path.json || "language/json" 
     }
     /** 获取当前客户端支持的语言纹理配置路径 */
     get languagePathTexture(): string {
-        return this._data.language.path.texture || "language/texture";
+        return this._data.language.path.texture || "language/texture" 
     }
 
     /** 是否启用远程资源 */
     get bundleEnable(): string {
-        return this._data.bundle.enable;
+        return this._data.bundle.enable 
     }
     /** 远程资源服务器地址 */
     get bundleServer(): string {
-        return this._data.bundle.server;
+        return this._data.bundle.server 
     }
     /** 远程资源名 */
     get bundleName(): string {
-        return this._data.bundle.name;
+        return this._data.bundle.name 
     }
     /** 远程资源版本号 */
     get bundleVersion(): string {
-        return this._data.bundle.version;
+        return this._data.bundle.version 
     }
 
-    private _data: any = null;
+    private _data: any = null 
     /** 游戏配置数据 */
     public get data(): any {
-        return this._data;
+        return this._data 
     }
     constructor(config: any) {
         let data = config.json

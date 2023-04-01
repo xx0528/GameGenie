@@ -3,7 +3,7 @@ export class StringUtil {
     /** 获取一个唯一标识的字符串 */
     static guid() {
         let guid: string = ""
-        for (let i = 1; i <= 32; i++) {
+        for (let i = 1;  i <= 32; i++) {
             let n = Math.floor(Math.random() * 16.0).toString(16)
             guid += n
             if ((i == 8) || (i == 12) || (i == 16) || (i == 20))
@@ -159,7 +159,7 @@ export class StringUtil {
      */
     static stringLen(str: string) {
         var realLength = 0, len = str.length, charCode = -1
-        for (var i = 0; i < len; i++) {
+        for (var  i = 0; i < len; i++) {
             charCode = str.charCodeAt(i)
             if (charCode >= 0 && charCode <= 128)
                 realLength += 1

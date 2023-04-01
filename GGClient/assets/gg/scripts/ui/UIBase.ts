@@ -1,13 +1,13 @@
 /*
  * @Author: xx
  * @Date: 2023-03-14 18:39:25
- * @LastEditTime: 2023-03-31 20:24:28
+ * @LastEditTime: 2023-04-01 18:52:40
  * @Description: 
  */
 
 import { Component, Event, Node } from "cc"
-import { ListenerFunc } from "../event/EventMessage"
-import { EventMgr } from "../event/EventMgr"
+import { ListenerFunc } from "../common/event/EventMessage"
+import { EventMgr } from "../common/event/EventMgr"
 
 
 export interface UIClass<T extends UIBase> {
