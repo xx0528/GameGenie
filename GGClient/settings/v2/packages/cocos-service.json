@@ -1,50 +1,23 @@
 {
-  "__version__": "3.0.6",
   "game": {
-    "app_id": "678129192",
-    "name": "GGClient",
+    "name": "UNKNOW GAME",
+    "app_id": "UNKNOW",
     "c_id": "0"
   },
   "appConfigMaps": [
     {
       "app_id": "UNKNOW",
-      "config_id": "2af675"
-    },
-    {
-      "app_id": "678129192",
-      "config_id": "570444"
+      "config_id": "0d7f50"
     }
   ],
   "configs": [
     {
       "app_id": "UNKNOW",
-      "config_id": "2af675",
+      "config_id": "0d7f50",
       "config_name": "Default",
       "config_remarks": "",
       "services": []
-    },
-    {
-      "app_id": "678129192",
-      "config_id": "9ead56",
-      "config_name": "Default",
-      "config_remarks": "",
-      "services": []
-    },
-    {
-      "app_id": "678129192",
-      "config_id": "570444",
-      "config_name": "Default",
-      "config_remarks": "",
-      "services": [
-        {
-          "service_id": "235",
-          "enable": true,
-          "param": {
-            "app_id": "678129192",
-            "store_id": "H5"
-          }
-        }
-      ]
     }
-  ]
+  ],
+  "__version__": "3.0.7"
 }

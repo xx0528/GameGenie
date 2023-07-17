@@ -1,10 +1,13 @@
 {
-  "name": "GGClient",
-  "uuid": "4a684e6a-f4cd-48c5-a902-7693e4a81e9f",
+  "_sourceId": "c30b28da-749e-479b-bcb6-cecd8d7be9e3",
   "creator": {
-    "version": "3.7.2"
+    "version": "3.7.3"
   },
   "dependencies": {
     "crypto-es": "^1.2.7"
-  }
+  },
+  "description": "game",
+  "name": "slot-game",
+  "uuid": "00d7d957-a3e8-4ad6-80f4-2fcfb235bca4",
+  "version": "3.6.3"
 }
