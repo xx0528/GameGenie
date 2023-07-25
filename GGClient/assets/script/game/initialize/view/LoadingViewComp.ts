@@ -1,8 +1,8 @@
 /*
  * @Author: dgflash
  * @Date: 2021-07-03 16:13:17
- * @LastEditors: dgflash
- * @LastEditTime: 2022-08-10 18:07:35
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-07-25 17:56:35
  */
 import { _decorator } from "cc";
 import { oops } from "../../../../../extensions/oops-plugin-framework/assets/core/Oops";
@@ -35,7 +35,7 @@ export class LoadingViewComp extends CCVMParentComp {
         this.data.prompt = oops.language.getLangByID("loading_load_player");
 
         // 进入自定义游戏内容界面
-        oops.gui.open(UIID.Demo);
+        oops.gui.open(UIID.SlotGame);
 
         // 关闭加载界面
         oops.gui.remove(UIID.Loading);
