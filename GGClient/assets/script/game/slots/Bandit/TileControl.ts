@@ -1,7 +1,7 @@
 /*
  * @Author: xx
  * @Date: 2023-07-25 16:16:53
- * @LastEditTime: 2023-07-25 17:34:11
+ * @LastEditTime: 2023-07-25 19:28:11
  * @Description: 
  */
 import { _decorator, Component, SpriteFrame, loader, Sprite, Node } from "cc";
@@ -19,7 +19,7 @@ export default class TileControl extends Component {
     glowNode = null!;
 
     async onLoad(): Promise<void> {
-        await this.loadTextures();
+        // await this.loadTextures();
         this.glowNode.active = false;
     }
 

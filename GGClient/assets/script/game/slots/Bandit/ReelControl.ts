@@ -58,7 +58,7 @@ export default class ReelControl extends Component {
     changeCallback(element: Node = null): void {
       const el = element;
       if (el.position.y * -1 > 288) {
-        el.position = new Vec3(0, -288 * -1);
+        el.position = new Vec3(element.position.x, element.position.y -288 * -1);
   
         let pop = null;
         if (this.result != null && this.result.length > 0) {
@@ -89,15 +89,17 @@ export default class ReelControl extends Component {
       this.stopSpinning = false;
       // Sound
       // this.audioSourceControl.playSound(SoundType.E_Sound_Reel_Start);
-      oops.audio.playEffect('bundle/game/slots/audios/reelStart')
+      // oops.audio.playEffect("audios/reelStart")
   
       this.reelAnchor.children.forEach(element => {   
         const delay = tween(element).delay(windUp);
-        const start = tween(element).by(0.25, { position: new Vec2(0, 144 * -1) }, { easing: 'backIn' });
+        const pos = element.position
+        console.log("其实位置 -- " + pos)
+        const start = tween(element).by(2.25, { position: new Vec2(pos.x, pos.y + 144 * -1) }, { easing: 'backIn' });
         const doChange = tween().call(() => this.changeCallback(element));
         const callSpinning = tween(element).call(() => this.doSpinning(element, 5));
         
-        element.getComponent('TileControl').activateGlow(false);
+        element.getComponent(TileControl).activateGlow(false);
         delay
           .then(start)
           .then(doChange)
@@ -110,9 +112,9 @@ export default class ReelControl extends Component {
     doSpinning(element: Node = null, times = 1): void {   
       // Sound
       // this.audioSourceControl.playSound(SoundType.E_Sound_Reel_Spin);
-      oops.audio.playEffect('bundle/game/slots/audios/reelStop')
+      // oops.audio.playEffect("audios/reelStop")
       
-      const move = tween().by(0.04, { position: new Vec2(0, -144) });
+      const move = tween().by(0.04, { position: new Vec2(element.position.x, element.position.y-144) });
       const doChange = tween().call(() => this.changeCallback(element));
       const repeat = tween(element).repeat(times, move.then(doChange));
       const checkEnd = tween().call(() => this.checkEndCallback(element));
@@ -124,11 +126,11 @@ export default class ReelControl extends Component {
     doStop(element: Node = null): void {
       // Sound
       // this.audioSourceControl.playSound(SoundType.E_Sound_Reel_Stop);
-      oops.audio.playEffect('bundle/game/slots/audios/reelStop')
+      // oops.audio.playEffect("audios/reelStop")
 
-      const move = tween(element).by(0.04, { position: new Vec2(0, -144) } as any);
+      const move = tween(element).by(0.04, { position: new Vec2(element.position.x, element.position.y - 144) } as any);
       const doChange = tween().call(() => this.changeCallback(element));
-      const end = tween().by(0.2, { position: new Vec2(0, -144) }, { easing: 'bounceOut' });
+      const end = tween().by(0.2, { position: new Vec2(element.position.x, element.position.y -144) }, { easing: 'bounceOut' });
       
       move
         .then(doChange)

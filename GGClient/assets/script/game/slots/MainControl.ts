@@ -35,7 +35,7 @@ export default class MainControl extends Component {
     click(): void {
         // Sound
         // this.audioSourceControl.playSound(SoundType.E_Sound_Mouse_Click);
-        oops.audio.playEffect('bundle/game/slots/audios/mouseClick')
+        // oops.audio.playEffect("audios/mouseClick")
     
         if (this.bandit.getComponent('BanditControl').spinning === false) {
           this.block = false;

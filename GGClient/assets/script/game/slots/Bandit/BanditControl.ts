@@ -56,7 +56,7 @@ export default class BanditControl extends Component {
             this.node.addChild(newReel);
             this.reels[i] = newReel;
 
-            const reelScript = newReel.getComponent('ReelControl') as ReelControl;
+            const reelScript = newReel.getComponent(ReelControl);
             reelScript.shuffle();
             reelScript.reelAnchor.getComponent(Layout).enabled = false;
         }
@@ -70,7 +70,7 @@ export default class BanditControl extends Component {
         // Set button text to Stop
         this.button.getChildByName('Label').getComponent(Label).string = 'STOP';
         for (let i = 0; i < this.numberOfReels; i += 1) {
-            const theReel = this.reels[i].getComponent('ReelControl');
+            const theReel = this.reels[i].getComponent(ReelControl);
             // Spin the reel with delay
             theReel.doSpin(0.03 * i);
         }

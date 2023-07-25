@@ -1,7 +1,7 @@
 /*
  * @Date: 2021-08-12 09:33:37
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-07-25 17:56:08
+ * @LastEditTime: 2023-07-25 18:12:44
  */
 
 import { LayerType, UIConfig } from "../../../../../extensions/oops-plugin-framework/assets/core/gui/layer/LayerManager";
@@ -26,5 +26,5 @@ export var UIConfigData: { [key: number]: UIConfig } = {
     [UIID.Netinstable]: { layer: LayerType.PopUp, prefab: "common/prefab/netinstable" },
     [UIID.Window]: { layer: LayerType.Dialog, prefab: "common/prefab/window" },
     [UIID.Demo]: { layer: LayerType.UI, prefab: "gui/demo/demo" },
-    [UIID.SlotGame]: { layer: LayerType.UI, prefab: "gui/game/slots/prefab/main_view" },
+    [UIID.SlotGame]: { layer: LayerType.UI, prefab: "game/slots/prefab/main_view" },
 }
