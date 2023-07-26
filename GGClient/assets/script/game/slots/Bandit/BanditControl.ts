@@ -70,7 +70,7 @@ export default class BanditControl extends Component {
         // Set button text to Stop
         this.button.getChildByName('Label').getComponent(Label).string = 'STOP';
         for (let i = 0; i < this.numberOfReels; i += 1) {
-            const theReel = this.reels[i].getComponent(ReelControl);
+            const theReel = this.reels[i].getComponent(ReelControl) as ReelControl;
             // Spin the reel with delay
             theReel.doSpin(0.03 * i);
         }

@@ -56,9 +56,8 @@ export default class ReelControl extends Component {
     }
     
     changeCallback(element: Node = null): void {
-      const el = element;
-      if (el.position.y * -1 > 288) {
-        el.position = new Vec3(element.position.x, element.position.y -288 * -1);
+      if (element.position.y < -288) {
+        element.position = new Vec3(0, 288);
   
         let pop = null;
         if (this.result != null && this.result.length > 0) {
@@ -66,10 +65,10 @@ export default class ReelControl extends Component {
         }
   
         if (pop != null && pop >= 0) {
-          (el.getComponent('TileControl') as TileControl).setTile(pop);
-          (el.getComponent('TileControl') as TileControl).activateGlow(true);
+          (element.getComponent('TileControl') as TileControl).setTile(pop);
+          (element.getComponent('TileControl') as TileControl).activateGlow(true);
         } else {
-          (el.getComponent('TileControl') as TileControl).setRandom();
+          (element.getComponent('TileControl') as TileControl).setRandom();
         }
       }
     }
@@ -93,9 +92,7 @@ export default class ReelControl extends Component {
   
       this.reelAnchor.children.forEach(element => {   
         const delay = tween(element).delay(windUp);
-        const pos = element.position
-        console.log("其实位置 -- " + pos)
-        const start = tween(element).by(2.25, { position: new Vec2(pos.x, pos.y + 144 * -1) }, { easing: 'backIn' });
+        const start = tween().by(0.25, { position: new Vec3(0, -144, 0) }, { easing: 'backIn' });
         const doChange = tween().call(() => this.changeCallback(element));
         const callSpinning = tween(element).call(() => this.doSpinning(element, 5));
         
@@ -114,7 +111,7 @@ export default class ReelControl extends Component {
       // this.audioSourceControl.playSound(SoundType.E_Sound_Reel_Spin);
       // oops.audio.playEffect("audios/reelStop")
       
-      const move = tween().by(0.04, { position: new Vec2(element.position.x, element.position.y-144) });
+      const move = tween().by(0.04, { position: new Vec3(0, -144, 0) });
       const doChange = tween().call(() => this.changeCallback(element));
       const repeat = tween(element).repeat(times, move.then(doChange));
       const checkEnd = tween().call(() => this.checkEndCallback(element));
@@ -128,9 +125,9 @@ export default class ReelControl extends Component {
       // this.audioSourceControl.playSound(SoundType.E_Sound_Reel_Stop);
       // oops.audio.playEffect("audios/reelStop")
 
-      const move = tween(element).by(0.04, { position: new Vec2(element.position.x, element.position.y - 144) } as any);
+      const move = tween(element).by(0.04, { position: new Vec3(0, -144, 0) } as any);
       const doChange = tween().call(() => this.changeCallback(element));
-      const end = tween().by(0.2, { position: new Vec2(element.position.x, element.position.y -144) }, { easing: 'bounceOut' });
+      const end = tween().by(0.2, { position: new Vec3(0, -144, 0) }, { easing: 'bounceOut' });
       
       move
         .then(doChange)

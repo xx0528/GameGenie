@@ -452,7 +452,7 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 18,
+      "x": 3.5999999999999943,
       "y": 0,
       "z": 0
     },
@@ -749,7 +749,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 128.8,
       "height": 136
     },
     "_anchorPoint": {
