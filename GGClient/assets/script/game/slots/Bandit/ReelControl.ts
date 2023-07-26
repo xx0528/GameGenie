@@ -87,8 +87,7 @@ export default class ReelControl extends Component {
     doSpin(windUp: number): void {
       this.stopSpinning = false;
       // Sound
-      // this.audioSourceControl.playSound(SoundType.E_Sound_Reel_Start);
-      // oops.audio.playEffect("audios/reelStart")
+      oops.audio.playEffect("game/slots/audios/reelStart")
   
       this.reelAnchor.children.forEach(element => {   
         const delay = tween(element).delay(windUp);
@@ -108,8 +107,7 @@ export default class ReelControl extends Component {
     // Spin reel. Repeated until checkEnd is true
     doSpinning(element: Node = null, times = 1): void {   
       // Sound
-      // this.audioSourceControl.playSound(SoundType.E_Sound_Reel_Spin);
-      // oops.audio.playEffect("audios/reelStop")
+      oops.audio.playEffect("game/slots/audios/reelStop")
       
       const move = tween().by(0.04, { position: new Vec3(0, -144, 0) });
       const doChange = tween().call(() => this.changeCallback(element));
@@ -122,8 +120,7 @@ export default class ReelControl extends Component {
     // Stop the reel from spinning
     doStop(element: Node = null): void {
       // Sound
-      // this.audioSourceControl.playSound(SoundType.E_Sound_Reel_Stop);
-      // oops.audio.playEffect("audios/reelStop")
+      oops.audio.playEffect("game/slots/audios/reelStop")
 
       const move = tween(element).by(0.04, { position: new Vec3(0, -144, 0) } as any);
       const doChange = tween().call(() => this.changeCallback(element));
